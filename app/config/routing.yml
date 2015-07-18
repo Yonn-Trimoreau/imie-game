@@ -1,0 +1,4 @@
+imie_game:
+    resource: "@ImieGameBundle/Resources/config/routing.yml"
+    prefix:   /
+
