@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {% block title %}
+            Imie Game - Hang Man
+        {% endblock %}
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/imiegame/css/main.css') }}" type="text/css" media="all" />
+    {% endblock %}
+    {% block javascripts %}
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ asset('bundles/imiegame/images/favicon.ico') }}" />
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="content">
+        </div>
+    </div>
+    <div id="content">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="flash_notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            <div class="flash_error">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <div id="footer">
+        <div class="content">
+        </div>
+    </div>
+</div>
