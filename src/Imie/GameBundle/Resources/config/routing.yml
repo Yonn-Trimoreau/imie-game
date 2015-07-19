@@ -2,6 +2,10 @@ imie_game_homepage:
     path:     /
     defaults: { _controller: ImieGameBundle:Home:index }
 
+imie_game_login:
+    path:   /login
+    defaults: { _controller: ImieGameBundle:Home:login }
+
 imie_game_logout:
     path:   /logout
     defaults: { _controller: ImieGameBundle:Home:logout }

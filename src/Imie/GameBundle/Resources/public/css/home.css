@@ -1,0 +1,145 @@
+#home #subtitle{
+    padding-bottom:100px;
+}
+
+#home .group            {
+    position:relative;
+    margin-bottom:45px;
+}
+#home input               {
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:300px;
+    border:none;
+    border-bottom:1px solid #aaa;
+    margin:0 auto;
+}
+#home input:focus         { outline:none; }
+
+/* LABEL ======================================= */
+#home label                {
+    color:#999;
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    top:10px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+    left: 50%;
+    margin-left: -150px;
+}
+
+/* active state */
+#home input:focus ~ label, #home input:valid ~ label        {
+    top:-20px;
+    font-size:14px;
+    color:#aaa;
+}
+
+/* BOTTOM BARS ================================= */
+#home .bar {
+    position:absolute;
+    display:block;
+    width:300px;
+    left:50%;
+    margin-left:-150px;
+}
+#home .bar:before, .bar:after     {
+    content:'';
+    height:2px;
+    width:0;
+    bottom:1px;
+    position:absolute;
+    background:#2680F3;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+}
+#home .bar:before {
+    left:50%;
+}
+#home .bar:after {
+    right:50%;
+}
+
+/* active state */
+#home input:focus ~ .bar:before, #home input:focus ~ .bar:after {
+    width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+#home .highlight {
+    position:absolute;
+    height:60%;
+    width:100px;
+    top:25%;
+    pointer-events:none;
+    opacity:0.5;
+    left:50%;
+    margin-left:-150px;
+}
+
+/* active state */
+#home input:focus ~ .highlight {
+    -webkit-animation:inputHighlighter 0.3s ease;
+    -moz-animation:inputHighlighter 0.3s ease;
+    animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from { background:#5264AE; }
+    to    { width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+    from { background:#5264AE; }
+    to    { width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+    from { background:#5264AE; }
+    to    { width:0; background:transparent; }
+}
+
+#home .btn {
+    position:relative;
+    left:50%;
+    width:190px;
+    transform: translate3d(-50%, -50%, 0);
+    padding: 1em 2em;
+    background-color: #2680F3;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 2px 0 #2980b9;
+}
+
+#home .btn span {
+    position: relative;
+    z-index: 1;
+}
+
+#home .btn .circle {
+    position: absolute;
+    z-index: 0;
+    background-color: #268aff;
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 1;
+    width: 100px;
+    height: 100px;
+}
+
+#home .btn .circle.animate {
+    animation: grow 0.5s linear;
+}
+
+@keyframes grow {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}

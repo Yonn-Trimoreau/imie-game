@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/imiegame/css/icons.css') }}" type="text/css" media="all" />
     {% endblock %}
     {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('bundles/imiegame/js/jquery.js') }}"></script>
     {% endblock %}
     <link rel="shortcut icon" href="{{ asset('bundles/imiegame/images/favicon.ico') }}" />
 </head>
@@ -22,7 +23,7 @@
                 <h1>Hangman</h1>
                 <h2>Imie Game</h2>
             </div>
-            {%  if app.session.get('playername') %}
+            {%  if app.session.get('playerid') %}
                 <a id="logout" href="{{ path('imie_game_logout') }}">
                     <i class="icon-cross"></i>
                     <p>Se déconnecter</p>
