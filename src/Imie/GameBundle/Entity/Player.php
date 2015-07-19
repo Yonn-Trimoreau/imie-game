@@ -39,9 +39,10 @@ class Player
     protected $games;
 
     /**
-     * @ORM\OneToOne(targetEntity="PlayerTheme", mappedBy="player")
+     * @ORM\ManyToOne(targetEntity="Theme", inversedBy="players")
+     * @ORM\JoinColumn(name="id_theme", referencedColumnName="id")
      */
-    protected $playerTheme;
+    protected $theme;
 
     public function __construct()
     {

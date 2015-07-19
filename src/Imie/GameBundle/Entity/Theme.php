@@ -33,7 +33,7 @@ class Theme
     protected $color_bg;
 
     /**
-     * @ORM\OneToMany(targetEntity="PlayerTheme", mappedBy="theme")
+     * @ORM\OneToMany(targetEntity="Player", mappedBy="theme")
      * @ORM\JoinColumn(name="id", referencedColumnName="id_theme")
      */
     protected $playerThemes;
