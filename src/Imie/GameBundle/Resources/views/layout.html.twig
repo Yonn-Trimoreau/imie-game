@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>
-        {% block title %}
-            Imie Game - Hang Man
-        {% endblock %}
-    </title>
+    <title>Imie Game - Hangman</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('bundles/imiegame/css/main.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/imiegame/css/icons.css') }}" type="text/css" media="all" />
     {% endblock %}
     {% block javascripts %}
     {% endblock %}
@@ -17,7 +14,20 @@
 <body>
 <div id="container">
     <div id="header">
+        <div id="bar">
+            <div id='red'></div><div id='blue'></div><div id='green'></div><div id='orange'></div><div id='blue2'></div><div id='pink'></div>
+        </div>
         <div class="content">
+            <div id="title">
+                <h1>Hangman</h1>
+                <h2>Imie Game</h2>
+            </div>
+            {%  if app.session.get('playername') %}
+                <a id="logout" href="{{ path('imie_game_logout') }}">
+                    <i class="icon-cross"></i>
+                    <p>Se déconnecter</p>
+                </a>
+            {% endif %}
         </div>
     </div>
     <div id="content">
