@@ -25,6 +25,7 @@ class PlayerRepository extends EntityRepository
         else{
             $player = new Player();
             $player->setName($playerName);
+            $player->set
             $em->persist($player);
             $em->flush();
             return $player->getId();

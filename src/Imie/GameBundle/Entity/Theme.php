@@ -36,11 +36,11 @@ class Theme
      * @ORM\OneToMany(targetEntity="Player", mappedBy="theme")
      * @ORM\JoinColumn(name="id", referencedColumnName="id_theme")
      */
-    protected $playerThemes;
+    protected $players;
 
     public function __construct()
     {
-        $this->playerThemes = new ArrayCollection();
+        $this->players = new ArrayCollection();
     }
 
     /**
@@ -90,39 +90,39 @@ class Theme
     }
 
     /**
-     * Add PlayerTheme entity to collection (one to many).
+     * Add Player entity to collection (one to many).
      *
-     * @param \Imie\GameBundle\Entity\PlayerTheme $playerTheme
+     * @param \Imie\GameBundle\Entity\Player $player
      * @return \Imie\GameBundle\Entity\Theme
      */
-    public function addPlayerTheme(PlayerTheme $playerTheme)
+    public function addPlayer(Player $player)
     {
-        $this->playerThemes[] = $playerTheme;
+        $this->players[] = $player;
 
         return $this;
     }
 
     /**
-     * Remove PlayerTheme entity from collection (one to many).
+     * Remove Player entity from collection (one to many).
      *
-     * @param \Imie\GameBundle\Entity\PlayerTheme $playerTheme
+     * @param \Imie\GameBundle\Entity\Player $player
      * @return \Imie\GameBundle\Entity\Theme
      */
-    public function removePlayerTheme(PlayerTheme $playerTheme)
+    public function removePlayer(Player $player)
     {
-        $this->playerThemes->removeElement($playerTheme);
+        $this->players->removeElement($player);
 
         return $this;
     }
 
     /**
-     * Get PlayerTheme entity collection (one to many).
+     * Get Player entity collection (one to many).
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPlayerThemes()
+    public function getPlayers()
     {
-        return $this->playerThemes;
+        return $this->players;
     }
 
     public function __sleep()

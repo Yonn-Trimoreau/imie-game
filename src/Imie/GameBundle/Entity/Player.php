@@ -133,26 +133,26 @@ class Player
     }
 
     /**
-     * Set PlayerTheme entity.
+     * Set Theme entity.
      *
-     * @param \Imie\GameBundle\Entity\PlayerTheme $playerTheme
+     * @param \Imie\GameBundle\Entity\Theme $theme
      * @return \Imie\GameBundle\Entity\Player
      */
-    public function setPlayerTheme(PlayerTheme $playerTheme)
+    public function setTheme(Theme $theme)
     {
-        $this->playerTheme = $playerTheme;
+        $this->theme = $theme;
 
         return $this;
     }
 
     /**
-     * Get PlayerTheme entity.
+     * Get Theme entity.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPlayerTheme()
+    public function getTheme()
     {
-        return $this->playerTheme;
+        return $this->theme;
     }
 
     public function __sleep()
