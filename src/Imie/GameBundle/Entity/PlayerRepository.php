@@ -14,21 +14,44 @@ class PlayerRepository extends EntityRepository
 {
     public function createIfNotExists($playerName) {
         $em = $this->getEntityManager();
-        $dql = 'SELECT player.id FROM ImieGameBundle:Player player WHERE player.name = :name';
+
+        $dql = 'SELECT player.id as id, theme.color_bg as bgcolor FROM ImieGameBundle:Player player INNER JOIN ImieGameBundle:Theme theme WITH player.id_theme = theme.id WHERE player.name = :name';
         $query = $em->createQuery($dql);
         $query->setParameter('name', $playerName);
 
         $res = $query->getResult();
         if(!empty($res)){
-            return $res[0]['id'];
+            return $res[0];
         }
         else{
+            $dql = 'SELECT theme.id FROM ImieGameBundle:Theme theme WHERE theme.color_bg = :color_bg';
+            $query = $em->createQuery($dql);
+            $query->setParameter('color_bg', '2680f3');
+            $themes = $query->getResult();
+            $theme = $em->find('ImieGameBundle:Theme',$themes[0]['id']);
             $player = new Player();
             $player->setName($playerName);
-            $player->set
+            $player->setTheme($theme);
             $em->persist($player);
             $em->flush();
-            return $player->getId();
+            $playerInfos = ['id' => $player->getId(), 'bgcolor' => $theme->getColorBg()];
+            return $playerInfos;
         }
+    }
+
+    public function updateTheme($playerId, $bgColor){
+        $em = $this->getEntityManager();
+
+        $player = $em->getRepository('ImieGameBundle:Player')->find($playerId);
+
+        $dql = 'SELECT theme.id FROM ImieGameBundle:Theme theme WHERE theme.color_bg = :color_bg';
+        $query = $em->createQuery($dql);
+        $query->setParameter('color_bg', $bgColor);
+        $themes = $query->getResult();
+        $theme = $em->find('ImieGameBundle:Theme',$themes[0]['id']);
+
+        $player->setTheme($theme);
+        $em->persist($player);
+        $em->flush();
     }
 }

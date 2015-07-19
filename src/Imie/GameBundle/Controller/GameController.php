@@ -8,6 +8,8 @@ class GameController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('ImieGameBundle:Game:index.html.twig');
+        $themes = $this->getDoctrine()->getEntityManager()->getRepository('ImieGameBundle:Theme')->findAll();
+
+        return $this->render('ImieGameBundle:Game:index.html.twig', array('themes' => $themes));
     }
 }

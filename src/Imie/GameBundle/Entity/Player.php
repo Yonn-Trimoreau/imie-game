@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Imie\GameBundle\Entity\Player
  *
  * @ORM\Entity(repositoryClass="PlayerRepository")
- * @ORM\Table(name="player")
+ * @ORM\Table(name="player", indexes={@ORM\Index(name="FK_PLAYER_THEME_idx", columns={"id_theme"})})
  */
 class Player
 {
@@ -31,6 +31,11 @@ class Player
      * @ORM\Column(name="`name`", type="string", length=45)
      */
     protected $name;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $id_theme;
 
     /**
      * @ORM\OneToMany(targetEntity="Game", mappedBy="player")

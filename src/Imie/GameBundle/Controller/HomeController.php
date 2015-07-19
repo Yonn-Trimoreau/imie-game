@@ -9,6 +9,7 @@ class HomeController extends Controller
 {
     public function indexAction()
     {
+        $this->get('session')->set('bgcolor','2680f3');
         $playerId = $this->get('session')->get('playerid');
         if(isset($playerId) && !empty($playerId)){
             return new RedirectResponse($this->generateUrl('imie_game_gamepage'));
@@ -22,9 +23,11 @@ class HomeController extends Controller
     {
         $playerRepo = $this->getDoctrine()->getManager()->getRepository('ImieGameBundle:Player');
 
-        $playerId = $playerRepo->createIfNotExists($this->get('request')->request->get('playername'));
+        $playerInfos = $playerRepo->createIfNotExists($this->get('request')->request->get('playername'));
 
-        $this->get('session')->set('playerid',$playerId);
+        $this->get('session')->set('playerid',$playerInfos['id']);
+
+        $this->get('session')->set('bgcolor',$playerInfos['bgcolor']);
 
         return new RedirectResponse($this->generateUrl('imie_game_gamepage'));
     }
@@ -32,6 +35,7 @@ class HomeController extends Controller
     public function logoutAction()
     {
         $this->get('session')->remove('playerid');
+        $this->get('session')->remove('bgcolor');
 
         return new RedirectResponse($this->generateUrl('imie_game_homepage'));
     }

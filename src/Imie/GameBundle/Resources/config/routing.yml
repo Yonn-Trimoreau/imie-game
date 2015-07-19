@@ -13,3 +13,7 @@ imie_game_logout:
 imie_game_gamepage:
     path:     /game
     defaults: { _controller: ImieGameBundle:Game:index }
+
+imie_game_changetheme:
+    path:     /change-theme/{bgcolor}
+    defaults: { _controller: ImieGameBundle:Theme:change }

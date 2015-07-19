@@ -1,56 +1,83 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Hangman - Imie Game</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('bundles/imiegame/css/main.css') }}" type="text/css" media="all" />
-        <link rel="stylesheet" href="{{ asset('bundles/imiegame/css/icons.css') }}" type="text/css" media="all" />
-    {% endblock %}
-    {% block javascripts %}
-        <script type="text/javascript" src="{{ asset('bundles/imiegame/js/jquery.js') }}"></script>
-    {% endblock %}
-    <link rel="shortcut icon" href="{{ asset('bundles/imiegame/images/favicon.ico') }}" />
-</head>
-<body>
-<div id="container">
-    <div id="header">
-        <div id="bar">
-            <div id='red'></div><div id='blue'></div><div id='green'></div><div id='orange'></div><div id='blue2'></div><div id='pink'></div>
-        </div>
-        <div class="content">
-            <div id="title">
-                <h1>Hangman</h1>
-                <h2>Imie Game</h2>
+    <head>
+        <title>Hangman - Imie Game</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/imiegame/css/main.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('bundles/imiegame/css/icons.css') }}" type="text/css" media="all" />
+        {% endblock %}
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('bundles/imiegame/js/jquery.js') }}"></script>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $('#theme>a').on('click',function(e){
+                        e.preventDefault();
+                        var href = $(this).attr('href');
+                        $.ajax({
+                            url: href
+                        });
+                        $('body').css('background-color',$(this).css('background-color'));
+                    });
+                });
+            </script>
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('bundles/imiegame/images/favicon.ico') }}" />
+    </head>
+    <body style='background-color:#{{ app.session.get('bgcolor') }};'>
+        <div id="container">
+            <div id="header">
+                <div class="colorbar">
+                    <div class='red'></div><div class='blue'></div><div class='green'></div><div class='orange'></div><div class='blue2'></div><div class='pink'></div>
+                </div>
+                <div class="content">
+                    <div id="title">
+                        <h1>Hangman</h1>
+                        <h2>Imie Game</h2>
+                    </div>
+                    {%  if app.session.get('playerid') %}
+                        <a id="logout" href="{{ path('imie_game_logout') }}">
+                            <i class="icon-cross"></i>
+                            <p>Se déconnecter</p>
+                        </a>
+                    {% endif %}
+                </div>
             </div>
-            {%  if app.session.get('playerid') %}
-                <a id="logout" href="{{ path('imie_game_logout') }}">
-                    <i class="icon-cross"></i>
-                    <p>Se déconnecter</p>
-                </a>
-            {% endif %}
-        </div>
-    </div>
-    <div id="content">
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash_notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
+            <div id="content">
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="flash_notice">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
 
-        {% for flashMessage in app.session.flashbag.get('error') %}
-            <div class="flash_error">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    <div class="flash_error">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
 
-        <div class="content">
-            {% block content %}
-            {% endblock %}
+                <div class="content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div id="footer">
+                <div class="colorbar">
+                    <div class='pink'></div><div class='blue2'></div><div class='orange'></div><div class='green'></div><div class='blue'></div><div class='red'></div>
+                </div>
+                <div class="content">
+                    <div id="signature">
+                        <h1>Yonn Trimoreau</h1>
+                    </div>
+                    {%  if app.session.get('playerid') %}
+                        <div id="theme">
+                            {% for theme in themes %}
+                                <a style='background-color:#{{ theme.colorBg }};' href="{{ path('imie_game_changetheme',{'bgcolor':theme.colorBg}) }}"></a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    </div>
-    <div id="footer">
-        <div class="content">
-        </div>
-    </div>
-</div>
+    </body>
+</html>

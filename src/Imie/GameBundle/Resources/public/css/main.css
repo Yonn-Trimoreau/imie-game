@@ -23,7 +23,6 @@ html {
 body
 {
     font: 14px "Lucida Grande", Lucida, Verdana, sans-serif;
-    background-color: #2680F3;
     height:100%;
 }
 
@@ -51,13 +50,18 @@ body
     color:white;
 }
 
-#header #bar {
+#header .colorbar {
     width: 100%;
     margin: auto;
     height: 56px;
     position: absolute;
     top:0px;
     background:#222;
+}
+
+#header .colorbar>div {
+    border-bottom-style: solid;
+    border-bottom-width: 4px;
 }
 
 #header #title{
@@ -102,46 +106,100 @@ body
     padding-left:15px;
 }
 
-#red {
+#footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    background: #222;
+    z-index: 100;
+    color:white;
+}
+
+#footer .colorbar {
+    width: 100%;
+    margin: auto;
+    height: 56px;
+    position: absolute;
+    bottom:0px;
+    background:#222;
+}
+
+#footer .colorbar>div {
+    border-top-style: solid;
+    border-top-width: 4px;
+}
+
+#footer #signature{
+    position:absolute;
+    bottom:0px;
+    line-height:56px;
+}
+
+#footer #signature h1{
+    font-size:18px;
+    display:block;
+    float:left;
+    padding:0px 15px 0px 10px;
+    font-variant:small-caps;
+}
+
+#footer #theme{
+    margin-right:-15px;
+}
+
+#footer #theme>a{
+    display:block;
+    width:100px;
+    float:right;
+    height:51px;
+    border-top:1px solid #222;
+    position:relative;
+    z-index:200;
+    cursor:pointer;
+    border-left:1px solid #222;
+}
+
+.red {
     float: left;
     width: 30%;
     height: 56px;
-    border-bottom: 4px solid #e1443d;
+    border-color: #e1443d;
 }
 
-#blue {
+.blue {
     float: left;
     width: 10%;
     height: 56px;
-    border-bottom: 4px solid #3bb9ff;
+    border-color: #3bb9ff;
 }
 
-#green {
+.green {
     float: left;
     width: 15%;
     height: 56px;
-    border-bottom: 4px solid #62C506;
+    border-color: #62C506;
 }
 
-#orange {
+.orange {
     float: left;
     width: 20%;
     height: 56px;
-    border-bottom: 4px solid orange;
+    border-color: orange;
 }
 
-#blue2 {
+.blue2 {
     float: left;
     width: 5%;
     height: 56px;
-    border-bottom: 4px solid #3bb9ff;
+    border-color: #3bb9ff;
 }
 
-#pink {
+.pink {
     float: left;
     width: 20%;
     height: 56px;
-    border-bottom: 4px solid #ff0dd0;
+    border-color: #ff0dd0;
 }
 
 #content {
@@ -154,6 +212,7 @@ body
 
 #content .content {
     padding-top:60px;
+    padding-bottom:60px;
     text-align:center;
 }
 

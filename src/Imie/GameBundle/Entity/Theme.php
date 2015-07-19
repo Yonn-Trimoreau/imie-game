@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Imie\GameBundle\Entity\Theme
  *
- * @ORM\Entity(repositoryClass="ThemeRepository")
+ * @ORM\Entity
  * @ORM\Table(name="theme")
  */
 class Theme
