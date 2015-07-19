@@ -30,11 +30,6 @@ class Theme
     /**
      * @ORM\Column(type="string", length=6)
      */
-    protected $color_text;
-
-    /**
-     * @ORM\Column(type="string", length=6)
-     */
     protected $color_bg;
 
     /**
@@ -69,29 +64,6 @@ class Theme
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set the value of color_text.
-     *
-     * @param string $color_text
-     * @return \Imie\GameBundle\Entity\Theme
-     */
-    public function setColorText($color_text)
-    {
-        $this->color_text = $color_text;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of color_text.
-     *
-     * @return string
-     */
-    public function getColorText()
-    {
-        return $this->color_text;
     }
 
     /**

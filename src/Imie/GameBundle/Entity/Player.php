@@ -39,10 +39,9 @@ class Player
     protected $games;
 
     /**
-     * @ORM\OneToMany(targetEntity="PlayerTheme", mappedBy="player")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id_player")
+     * @ORM\OneToOne(targetEntity="PlayerTheme", mappedBy="player")
      */
-    protected $playerThemes;
+    protected $playerTheme;
 
     public function __construct()
     {
@@ -133,39 +132,26 @@ class Player
     }
 
     /**
-     * Add PlayerTheme entity to collection (one to many).
+     * Set PlayerTheme entity.
      *
      * @param \Imie\GameBundle\Entity\PlayerTheme $playerTheme
      * @return \Imie\GameBundle\Entity\Player
      */
-    public function addPlayerTheme(PlayerTheme $playerTheme)
+    public function setPlayerTheme(PlayerTheme $playerTheme)
     {
-        $this->playerThemes[] = $playerTheme;
+        $this->playerTheme = $playerTheme;
 
         return $this;
     }
 
     /**
-     * Remove PlayerTheme entity from collection (one to many).
-     *
-     * @param \Imie\GameBundle\Entity\PlayerTheme $playerTheme
-     * @return \Imie\GameBundle\Entity\Player
-     */
-    public function removePlayerTheme(PlayerTheme $playerTheme)
-    {
-        $this->playerThemes->removeElement($playerTheme);
-
-        return $this;
-    }
-
-    /**
-     * Get PlayerTheme entity collection (one to many).
+     * Get PlayerTheme entity.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPlayerThemes()
+    public function getPlayerTheme()
     {
-        return $this->playerThemes;
+        return $this->playerTheme;
     }
 
     public function __sleep()

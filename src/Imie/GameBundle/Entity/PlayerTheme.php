@@ -37,7 +37,7 @@ class PlayerTheme
     protected $id_theme;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Player", inversedBy="playerThemes")
+     * @ORM\OneToOne(targetEntity="Player", inversedBy="playerTheme")
      * @ORM\JoinColumn(name="id_player", referencedColumnName="id")
      */
     protected $player;
