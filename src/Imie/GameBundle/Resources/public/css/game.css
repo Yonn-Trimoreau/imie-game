@@ -1,0 +1,96 @@
+#game{
+    display:bloc;
+    float:left;
+}
+
+#game #hangman{
+    width:238px;
+    position:relative;
+    left:361px;
+    padding-bottom:60px;
+    text-align:left;
+}
+
+#game #result{
+    font-size:35px;
+    letter-spacing:4px;
+    padding-bottom:60px;
+}
+
+#game #letters{
+    display:block;
+    float:left;
+}
+
+#game #letters>div{
+    vertical-align:middle;
+    display:inline-block;
+    overflow: hidden;
+    position: relative;
+    text-align:center;
+    font-size:25px;
+    font-weight:bold;
+    width: 51px;
+    height: 51px;
+    float:left;
+    margin:10px;
+    margin-bottom:12px;
+    cursor:pointer;
+    border-radius:8px;
+}
+
+#game #letters>div>.circle{
+    margin-top:26px;
+    margin-left:26px;
+}
+
+#game #letters>div>a{
+    color:white;
+    text-decoration:none;
+    line-height:51px;
+}
+
+#game #letters>div.disabled{
+    pointer-events:none;
+}
+
+#game #replay{
+    left:50%;
+    width:190px;
+    top:-15px;
+    transform: translate3d(-50%, -50%, 0);
+    height:40px;
+    margin-top:-40px;
+    background-color:#FFCD14;
+    display:none;
+}
+
+#game #replay>span{
+    line-height:40px;
+}
+
+#game #stats{
+    position:relative;
+    top:-200px;
+    left:-15px;
+    text-align:center;
+    font-size:25px;
+    margin-top:-81px;
+}
+
+#game #stats td{
+    height:40px;
+    width:40px;
+    box-shadow: 1px 1px 2px black;
+}
+
+#game #stats #won{
+    background-color:#62c506;
+    border-top-right-radius:8px;
+    border-bottom:1px solid black;
+}
+
+#game #stats #lost{
+    background-color:#e1443d;
+    border-bottom-right-radius:8px;
+}

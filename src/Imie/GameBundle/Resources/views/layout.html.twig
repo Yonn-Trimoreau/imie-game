@@ -21,6 +21,62 @@
                     });
                 });
             </script>
+            <script type="text/javascript">
+                window.shadeColor = function(color, percent) {
+                    var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+                    return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
+                };
+                window.rgb2hex = function(orig){
+                    var rgb = orig.replace(/\s/g,'').match(/^rgba?\((\d+),(\d+),(\d+)/i);
+                    return (rgb && rgb.length === 4) ? "#" +
+                    ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+                    ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+                    ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : orig;
+                };
+
+                var material;
+
+                $(document).ready(function() {
+                    return material.init();
+                });
+
+                material = {
+                    init: function() {
+                        return this.bind_events();
+                    },
+                    bind_events: function() {
+                        return $(document).on("click", ".btn", function(e) {
+                            var circle, size, x, y;
+                            e.preventDefault();
+                            circle = $("<div class='circle'></div>");
+                            circle.css('background-color',window.shadeColor(window.rgb2hex($(this).css('background-color')),0.5));
+
+                            $(this).append(circle);
+                            x = e.pageX - $(this).offset().left - circle.width() / 2;
+                            y = e.pageY - $(this).offset().top - circle.height() / 2;
+                            size = $(this).width();
+                            circle.css({
+                                top: y + 'px',
+                                left: x + 'px',
+                                width: size + 'px',
+                                height: size + 'px'
+                            }).addClass("animate");
+                            var myForm = $('#login-form');
+                            if (myForm.length == 1 && !myForm[0].checkValidity()) {
+                                // If the form is invalid, submit it. The form won't actually submit;
+                                // this will just cause the browser to display the native HTML5 error messages.
+                                myForm.find(':submit').click()
+                            }
+                            else{
+                                myForm.submit();
+                            }
+                            return setTimeout(function() {
+                                return circle.remove();
+                            }, 500);
+                        });
+                    }
+                };
+            </script>
         {% endblock %}
         <link rel="shortcut icon" href="{{ asset('bundles/imiegame/images/favicon.ico') }}" />
     </head>

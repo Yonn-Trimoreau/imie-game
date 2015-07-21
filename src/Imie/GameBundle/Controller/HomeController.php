@@ -26,7 +26,7 @@ class HomeController extends Controller
         $playerInfos = $playerRepo->createIfNotExists($this->get('request')->request->get('playername'));
 
         $this->get('session')->set('playerid',$playerInfos['id']);
-
+        $this->get('session')->set('playername', $this->get('request')->request->get('playername'));
         $this->get('session')->set('bgcolor',$playerInfos['bgcolor']);
 
         return new RedirectResponse($this->generateUrl('imie_game_gamepage'));
@@ -35,6 +35,7 @@ class HomeController extends Controller
     public function logoutAction()
     {
         $this->get('session')->remove('playerid');
+        $this->get('session')->remove('playername');
         $this->get('session')->remove('bgcolor');
 
         return new RedirectResponse($this->generateUrl('imie_game_homepage'));

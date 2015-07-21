@@ -4,7 +4,98 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/imiegame/css/game.css') }}" type="text/css" media="all" />
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#theme>a').on('click',function(e){
+                e.preventDefault();
+                $('#game>#letters>div').not('.disabled').css('background-color',$(this).css('background-color'));
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#letters>.btn').on('click', function (e) {
+                var wordLength = {{ word.text|length }};
+                if(!window.wordLength) window.wordLength = wordLength;
+                if(!window.nbTry) window.nbTry = 0;
+
+                var letter = $(this).children('a').text();
+                var nbLetter = $('span.'+letter).length;
+                if(nbLetter > 0){
+                    $('span.'+letter).text(letter);
+                    window.wordLength -= nbLetter;
+                    $(this).addClass('disabled').css('background-color','#62c506');
+                }
+                else{
+                    window.nbTry += 1;
+                    $('#hangman>img').attr('src','/bundles/imiegame/images/stage'+(window.nbTry+1)+'.jpg');
+                    $(this).addClass('disabled').css('background-color','grey');
+                }
+
+                if(window.wordLength == 0){
+                    $('#letters>.btn').css('pointer-events','none');
+                    $('#subtitle>h2').text('Vous avez gagné :)').css('color','#62c506');
+                    $('#replay').show();
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ path('imie_game_gamepage_win') }}"
+                    }).done(function(data) {
+                        $('#stats #won').text(data.won);
+                    });
+                }
+                if(window.nbTry == 6){
+                    $('#letters>.btn').css('pointer-events','none');
+                    $('#subtitle>h2').text('Vous avez perdu :(').css('color','#e1443d');
+                    $('#replay').show();
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ path('imie_game_gamepage_loose') }}"
+                    }).done(function(data) {
+                        $('#stats #lost').text(data.lost);
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}
 
 {% block content %}
-
+    <div id="game">
+        <hgroup id="subtitle">
+            <h1>Bienvenue {{ app.session.get('playername') }}</h1>
+            <h2>Tentez votre chance au jeu du pendu !</h2>
+        </hgroup>
+        <div class="btn" id="replay" onclick="window.location.reload()">
+            <span>Rejouer</span>
+        </div>
+        <div id="hangman">
+            <img src="{{ asset('bundles/imiegame/images/stage1.jpg') }}">
+        </div>
+        {% if stats.won > 0 or stats.lost > 0 %}
+            <div id="stats">
+                <table>
+                    <tr>
+                        <td id="won">{{ stats.won }}</td>
+                    </tr>
+                    <tr>
+                        <td id="lost">{{ stats.lost }}</td>
+                    </tr>
+                </table>
+            </div>
+        {% endif %}
+        <div id="result">
+            {% for letter in wordsplit %}
+                <span class="{{ letter }}">_</span>
+            {% endfor %}
+        </div>
+        <div id="letters">
+            {% for letter in 'A'..'Z' %}
+                <div class="btn" style='background-color:#{{ app.session.get('bgcolor') }};'>
+                    <a href="#">{{ letter }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

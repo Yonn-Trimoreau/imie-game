@@ -14,6 +14,18 @@ imie_game_gamepage:
     path:     /game
     defaults: { _controller: ImieGameBundle:Game:index }
 
+imie_game_gamepage_win:
+    path:     /game/win
+    defaults: { _controller: ImieGameBundle:Game:win }
+    requirements:
+        _method:  POST
+
+imie_game_gamepage_loose:
+    path:     /game/loose
+    defaults: { _controller: ImieGameBundle:Game:loose }
+    requirements:
+        _method:  POST
+
 imie_game_changetheme:
     path:     /change-theme/{bgcolor}
     defaults: { _controller: ImieGameBundle:Theme:change }

@@ -54,4 +54,32 @@ class PlayerRepository extends EntityRepository
         $em->persist($player);
         $em->flush();
     }
+
+    public function getStats(Player $player)
+    {
+        $em = $this->getEntityManager();
+
+        $dql = 'SELECT COUNT(game.id) as won FROM ImieGameBundle:Game game INNER JOIN ImieGameBundle:Player player WITH player.id = game.id_player WHERE game.state = \'won\' AND player.id = :id_player';
+        $query = $em->createQuery($dql);
+        $query->setParameter('id_player', $player->getId());
+        $stat = $query->getResult();
+        $stats['won'] = $stat[0]['won'];
+
+        $dql = 'SELECT COUNT(game.id) as lost FROM ImieGameBundle:Game game INNER JOIN ImieGameBundle:Player player WITH player.id = game.id_player WHERE game.state = \'lost\' AND player.id = :id_player';
+        $query = $em->createQuery($dql);
+        $query->setParameter('id_player', $player->getId());
+        $stat = $query->getResult();
+        $stats['lost'] = $stat[0]['lost'];
+
+        $dql = 'SELECT game FROM ImieGameBundle:Game game INNER JOIN ImieGameBundle:Player player WITH player.id = game.id_player WHERE game.state = \'started\' AND player.id = :id_player';
+        $query = $em->createQuery($dql);
+        $query->setParameter('id_player', $player->getId());
+        $games = $query->getResult();
+        foreach($games as $game){
+            $em->remove($game);
+        }
+        $em->flush();
+
+        return $stats;
+    }
 }

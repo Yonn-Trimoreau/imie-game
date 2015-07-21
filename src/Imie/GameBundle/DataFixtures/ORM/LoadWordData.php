@@ -1942,7 +1942,7 @@ class LoadWordData extends AbstractFixture
         $em->persist($word);
 
         $word = new Word();
-        $word->setText('SOCIERE');
+        $word->setText('SORCIERE');
         $em->persist($word);
 
         $word = new Word();

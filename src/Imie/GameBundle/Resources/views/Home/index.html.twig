@@ -5,52 +5,6 @@
     <link rel="stylesheet" href="{{ asset('bundles/imiegame/css/home.css') }}" type="text/css" media="all" />
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        var material;
-
-        $(document).ready(function() {
-            return material.init();
-        });
-
-        material = {
-            init: function() {
-                return this.bind_events();
-            },
-            bind_events: function() {
-                return $(document).on("click", ".btn", function(e) {
-                    var circle, size, x, y;
-                    e.preventDefault();
-                    circle = $("<div class='circle'></div>");
-                    $(this).append(circle);
-                    x = e.pageX - $(this).offset().left - circle.width() / 2;
-                    y = e.pageY - $(this).offset().top - circle.height() / 2;
-                    size = $(this).width();
-                    circle.css({
-                        top: y + 'px',
-                        left: x + 'px',
-                        width: size + 'px',
-                        height: size + 'px'
-                    }).addClass("animate");
-                    var $myForm = $('#login-form');
-                    if (!$myForm[0].checkValidity()) {
-                        // If the form is invalid, submit it. The form won't actually submit;
-                        // this will just cause the browser to display the native HTML5 error messages.
-                        $myForm.find(':submit').click()
-                    }
-                    else{
-                        $myForm.submit();
-                    }
-                    return setTimeout(function() {
-                        return circle.remove();
-                    }, 500);
-                });
-            }
-        };
-    </script>
-{% endblock %}
-
 {% block content %}
     <div id="home">
         <hgroup id="subtitle">
