@@ -48,6 +48,9 @@
                 if(window.nbTry == 6){
                     $('#letters>.btn').css('pointer-events','none');
                     $('#subtitle>h2').text('Vous avez perdu :(').css('color','#e1443d');
+                    $.each($('#result>span'),function(key,value){
+                        $(this).text($(this).attr('class'));
+                    });
                     $('#replay').show();
                     $.ajax({
                         method: "POST",
